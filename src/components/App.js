@@ -15,6 +15,7 @@ class App extends Component {
     }
 
     this.getCoordinates = this.getCoordinates.bind(this);
+    this.getWeather = this.getWeather.bind(this);
   }
 
   // Get location coordinates on map click
@@ -27,6 +28,10 @@ class App extends Component {
         }
       });
     })
+  }
+
+  getWeather() {
+
   }
 
   render() {
