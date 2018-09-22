@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/App.css';
 import Map from './Map';
+import axios from 'axios';
 
 class App extends Component {
   constructor() {
@@ -15,7 +16,7 @@ class App extends Component {
     }
 
     this.getCoordinates = this.getCoordinates.bind(this);
-    this.getWeather = this.getWeather.bind(this);
+    this.getLocationFromCoordinates = this.getLocationFromCoordinates.bind(this);
   }
 
   // Get location coordinates on map click
@@ -27,11 +28,18 @@ class App extends Component {
           longitude: JSON.stringify(e.lngLat.lng)
         }
       });
+
+      this.getLocationFromCoordinates();
     })
   }
 
-  getWeather() {
+  getLocationFromCoordinates() {
+    axios.get(`http://www.mapquestapi.com/geocoding/v1/reverse?key=${process.env.REACT_APP_MAPQUEST_GEOCODE_KEY}&location=${this.state.location.latitude},${this.state.location.longitude}`)
+    .then(res => {
+      const location = {...res.data.results[0].locations[0]};
 
+      console.log(location);
+    })
   }
 
   render() {
