@@ -8,11 +8,25 @@ class App extends Component {
 
     this.state = {
       location: {
-        latitude: 'blah',
+        latitude: '',
         longitude: '',
         zoom: 2
       }
     }
+
+    this.getCoordinates = this.getCoordinates.bind(this);
+  }
+
+  // Get location coordinates on map click
+  getCoordinates(map, e) {
+    map.on('click', e => {
+      this.setState({
+        location: {
+          latitude: JSON.stringify(e.lngLat.lat),
+          longitude: JSON.stringify(e.lngLat.lng)
+        }
+      });
+    })
   }
 
   render() {
@@ -25,7 +39,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <div className="mapContainer">
-          <Map {...this.state.location} />
+          <Map {...this.state.location} getCoordinates={this.getCoordinates} />
         </div>
       </div>
     );

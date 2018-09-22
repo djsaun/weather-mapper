@@ -12,10 +12,10 @@ class Map extends Component {
   }
 
   render() {
-    let {latitude, longitude} = this.props;
-
+    let {latitude, longitude, getCoordinates} = this.props;
+    // console.log(getCoordinates());
     return (
-      <div className="map" ref={el => this.mapContainer = el}></div>
+      <div className="map" ref={el => this.mapContainer = el} onClick={() => getCoordinates(this.map)}></div>
     )
   } 
 }
