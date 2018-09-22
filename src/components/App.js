@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../css/App.css';
+import Map from './Map';
 
 class App extends Component {
   constructor() {
@@ -7,8 +8,9 @@ class App extends Component {
 
     this.state = {
       location: {
-        latitude: '',
-        longitude: ''
+        latitude: 'blah',
+        longitude: '',
+        zoom: 2
       }
     }
   }
@@ -22,6 +24,9 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <div className="mapContainer">
+          <Map {...this.state.location} />
+        </div>
       </div>
     );
   }
