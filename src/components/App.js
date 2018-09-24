@@ -10,8 +10,14 @@ class App extends Component {
     this.state = {
       location: {
         latitude: '',
-        longitude: '',
-        zoom: 2
+        longitude: ''
+      },
+      address: {
+        street: '',
+        city: '',
+        county: '',
+        state: '',
+        zip: '' 
       }
     }
 
@@ -28,7 +34,7 @@ class App extends Component {
         }
       });
 
-      // this.getLocationFromCoordinates();
+      this.getLocationFromCoordinates();
   }
 
   getLocationFromCoordinates() {
