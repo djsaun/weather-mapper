@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import ReactMapboxGl from "react-mapbox-gl";
+import ReactMapboxGl, {Layer, Feature} from "react-mapbox-gl";
 
 const Map = ReactMapboxGl({
   accessToken: process.env.REACT_APP_MAPBOX_TOKEN
 });
 class Maps extends Component {
   render() {
-    let {getCoordinates} = this.props;
+    let {latitude, longitude, getCoordinates} = this.props;
 
     return (
       <Map
@@ -18,6 +18,12 @@ class Maps extends Component {
         zoom={[2]}
         onClick={getCoordinates}
         >
+        <Layer
+          type="symbol"
+          layout={{ "icon-image": "marker-11" }}>
+          
+          <Feature coordinates={[longitude,latitude]}/>
+        </Layer>
       </Map>
     )
   } 

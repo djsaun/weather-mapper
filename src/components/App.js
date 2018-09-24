@@ -71,6 +71,7 @@ class App extends Component {
       this.getLocationFromCoordinates();
   }
 
+
   getLocationFromCoordinates() {
     axios.get(`http://www.mapquestapi.com/geocoding/v1/reverse?key=${process.env.REACT_APP_MAPQUEST_GEOCODE_KEY}&location=${this.state.location.latitude},${this.state.location.longitude}`)
     .then(res => {
