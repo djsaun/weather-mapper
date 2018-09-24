@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../css/App.css';
-import Map from './Map';
+import Maps from './Map';
 import axios from 'axios';
 
 class App extends Component {
@@ -21,7 +21,6 @@ class App extends Component {
 
   // Get location coordinates on map click
   getCoordinates(map, e) {
-    map.on('click', e => {
       this.setState({
         location: {
           latitude: JSON.stringify(e.lngLat.lat),
@@ -29,8 +28,7 @@ class App extends Component {
         }
       });
 
-      this.getLocationFromCoordinates();
-    })
+      // this.getLocationFromCoordinates();
   }
 
   getLocationFromCoordinates() {
@@ -52,7 +50,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <div className="mapContainer">
-          <Map {...this.state.location} getCoordinates={this.getCoordinates} />
+          <Maps {...this.state.location} getCoordinates={this.getCoordinates} />
         </div>
       </div>
     );

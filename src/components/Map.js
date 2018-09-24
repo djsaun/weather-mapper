@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
-import mapboxgl from 'mapbox-gl'
-class Map extends Component {
+import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 
-  componentDidMount() {
-    mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN
-    this.map = new mapboxgl.Map({
-      container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v9',
-      zoom: this.props.zoom
-    });
-  }
-
+const Map = ReactMapboxGl({
+  accessToken: process.env.REACT_APP_MAPBOX_TOKEN
+});
+class Maps extends Component {
   render() {
-    let {latitude, longitude, getCoordinates} = this.props;
-    // console.log(getCoordinates());
+    let {getCoordinates} = this.props;
+
     return (
-      <div className="map" ref={el => this.mapContainer = el} onClick={() => getCoordinates(this.map)}></div>
+      <Map
+        style="mapbox://styles/mapbox/streets-v9"
+        containerStyle={{
+          height: "100vh",
+          width: "100vw"
+        }}
+        onClick={getCoordinates}
+        >
+      </Map>
     )
   } 
 }
 
-export default Map;
+export default Maps;
