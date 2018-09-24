@@ -21,7 +21,6 @@ class Maps extends Component {
         <Layer
           type="symbol"
           layout={{ "icon-image": "harbor-15" }}>
-          
           <Feature coordinates={[longitude,latitude]}/>
         </Layer>
       </Map>
