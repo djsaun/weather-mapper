@@ -20,7 +20,7 @@ class Maps extends Component {
         >
         <Layer
           type="symbol"
-          layout={{ "icon-image": "marker-11" }}>
+          layout={{ "icon-image": "harbor-15" }}>
           
           <Feature coordinates={[longitude,latitude]}/>
         </Layer>

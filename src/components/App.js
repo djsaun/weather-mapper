@@ -67,8 +67,10 @@ class App extends Component {
         }
       });
 
-      this.getWeatherFromCoordinates();
-      this.getLocationFromCoordinates();
+      map.flyTo({center: [this.state.location.longitude, this.state.location.latitude]})
+
+      // this.getWeatherFromCoordinates();
+      // this.getLocationFromCoordinates();
   }
 
 
