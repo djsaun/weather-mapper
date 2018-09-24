@@ -43,6 +43,16 @@ class App extends Component {
       const location = {...res.data.results[0].locations[0]};
 
       console.log(location);
+
+      this.setState({
+        address: {
+          street: location.street,
+          city: location.adminArea5,
+          county: location.adminArea4,
+          state: location.adminArea3,
+          zip: location.postalCode
+        }
+      })
     })
   }
 

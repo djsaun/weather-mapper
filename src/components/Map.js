@@ -15,7 +15,6 @@ class Maps extends Component {
           height: "100vh",
           width: "100vw"
         }}
-        center={[-104.99, 39.75]}
         zoom={[2]}
         onClick={getCoordinates}
         >
