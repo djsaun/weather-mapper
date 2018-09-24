@@ -18,7 +18,8 @@ class App extends Component {
         city: '',
         county: '',
         state: '',
-        zip: '' 
+        zip: '' ,
+        error: null
       },
       weather: {
         // Feels like temp
@@ -49,7 +50,8 @@ class App extends Component {
         windGust: '',
         // The wind speed in miles per hour.
         windSpeed: '',
-        units: 'imperial'
+        units: 'imperial',
+        error: null
       }
     }
 
@@ -70,8 +72,8 @@ class App extends Component {
 
       map.flyTo({center: [this.state.location.longitude, this.state.location.latitude]})
 
-      // this.getWeatherFromCoordinates();
-      // this.getLocationFromCoordinates();
+      this.getWeatherFromCoordinates();
+      this.getLocationFromCoordinates();
   }
 
 
@@ -88,6 +90,14 @@ class App extends Component {
           county: location.adminArea4,
           state: location.adminArea3,
           zip: location.postalCode
+        }
+      })
+    })
+    .catch(error => {
+      this.setState({
+        address: {
+          ...this.state.address,
+          error
         }
       })
     })
@@ -120,6 +130,14 @@ class App extends Component {
         }
       })
     })
+    .catch(error => {
+      this.setState({
+        weather: {
+          ...this.state.weather,
+          error
+        }
+      })
+    })
   }
 
   render() {
@@ -128,7 +146,7 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <Dashboard />
+        <Dashboard address={this.state.address} weather={this.state.weather} />
         <div className="mapContainer">
           <Maps {...this.state.location} getCoordinates={this.getCoordinates} />
         </div>
