@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Icon from './Icon';
 
 class Dashboard extends Component {
   render() {
@@ -20,7 +21,7 @@ class Dashboard extends Component {
         <div className="weatherContainer">
           <div className="current">
             <h5>Current Conditions</h5>
-            <i className="fal fa-sun"></i>
+            <Icon icon={weather.icon} />
             <p>{weather.summary}</p>
             <p>{weather.temp}°</p>
             <p>{weather.apparentTemp}°</p>
