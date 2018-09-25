@@ -31,7 +31,9 @@ class Icon extends Component {
     // }
 
     return (
-      <div></div>
+      <div>
+        <i className="wi wi-night-sleet"></i>
+      </div>
     )
   }
 }
