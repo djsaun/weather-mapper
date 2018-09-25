@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 class Dashboard extends Component {
   render() {
-    let {address, weather} = this.props;
+    const {address, weather} = this.props;
     const windBearing = weather.windBearing;
-    console.log(windBearing)
+    const icon = weather.icon;
+
 
     function convertWindBearingToText(num) {
       const val = Math.floor((num / 22.5) + 0.5);
@@ -19,6 +20,7 @@ class Dashboard extends Component {
         <div className="weatherContainer">
           <div className="current">
             <h5>Current Conditions</h5>
+            <i className="fal fa-sun"></i>
             <p>{weather.summary}</p>
             <p>{weather.temp}°</p>
             <p>{weather.apparentTemp}°</p>
