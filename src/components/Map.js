@@ -12,7 +12,7 @@ class Maps extends Component {
       <Map
         style={"mapbox://styles/mapbox/streets-v9"}
         containerStyle={{
-          height: "100vh",
+          height: "85vh",
           width: "100vw"
         }}
         zoom={[2]}

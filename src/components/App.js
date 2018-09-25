@@ -18,8 +18,10 @@ class App extends Component {
         city: '',
         county: '',
         state: '',
+        country: '',
         zip: '' ,
-        error: null
+        error: null,
+        display: false
       },
       weather: {
         // Feels like temp
@@ -50,8 +52,11 @@ class App extends Component {
         windGust: '',
         // The wind speed in miles per hour.
         windSpeed: '',
+        // The direction the wind is coming from in degrees
+        windBearing: '',
         units: 'imperial',
-        error: null
+        error: null,
+        display: false
       }
     }
 
@@ -81,6 +86,7 @@ class App extends Component {
     axios.get(`http://www.mapquestapi.com/geocoding/v1/reverse?key=${process.env.REACT_APP_MAPQUEST_GEOCODE_KEY}&location=${this.state.location.latitude},${this.state.location.longitude}`)
     .then(res => {
       const location = {...res.data.results[0].locations[0]};
+      console.log(location)
 
       this.setState({
         address: {
@@ -89,7 +95,9 @@ class App extends Component {
           city: location.adminArea5,
           county: location.adminArea4,
           state: location.adminArea3,
-          zip: location.postalCode
+          country: location.adminArea1,
+          zip: location.postalCode,
+          display: true
         }
       })
     })
@@ -127,6 +135,8 @@ class App extends Component {
           time: currentWeather.currently.time,
           windGust: currentWeather.currently.windGust,
           windSpeed: currentWeather.currently.windSpeed,
+          windBearing: currentWeather.currently.windBearing,
+          display: true
         }
       })
     })
@@ -147,9 +157,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <Dashboard address={this.state.address} weather={this.state.weather} />
-        <div className="mapContainer">
-          <Maps {...this.state.location} getCoordinates={this.getCoordinates} />
-        </div>
+        <Maps {...this.state.location} getCoordinates={this.getCoordinates} />
       </div>
     );
   }
