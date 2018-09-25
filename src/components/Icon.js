@@ -4,35 +4,31 @@ class Icon extends Component {
   render() {
     const icon = this.props.icon;
     let iconVal;
-    // console.log(icon);
-    // let iconType;
 
-    const iconTypes = [["clear-day", '<i class="fal fa-sun"></i>'], ["clear-night", '<i class="fal fa-moon"></i>'], ["partly-cloudy-day", 'test'], ["partly-cloudy-night", 'test'], ["cloudy", '<i class="fal fa-cloud"></i>'], ["rain", 'test'], ["sleet", 'test'], ["snow", 'test'], ["wind", 'test'], ["fog", 'test']];
+    // Associate Dark Sky icons (index 0) with weather icons (index 1)
+    const iconTypes = [
+      ["clear-day", 'day-sunny'],
+      ["clear-night", 'night-clear'],
+      ["partly-cloudy-day", 'day-cloudy'],
+      ["partly-cloudy-night", 'night-alt-cloudy'],
+      ["cloudy", 'cloudy'],
+      ["rain", 'rain'],
+      ["sleet", 'sleet'],
+      ["snow", 'snow-wind'],
+      ["wind", 'windy'],
+      ["fog", 'fog']
+    ];
 
-    iconTypes.map(iconType => {
-      console.log(iconType[0])
+    // Loop through iconTypes and set the iconVal value to the appropriate icon
+    {iconTypes.map(iconType => {
       if (iconType[0] === icon) {
-        console.log(icon)
+        iconVal = iconType[1];
       }
-    })
-
-    // if (icon === 'clear-day') {
-    //   iconType = '<i class="fal fa-sun"></i>';
-    // } else if (icon === 'clear-night') {
-
-    // } else if (icon === 'rain') {
-
-    // } else if (icon === 'snow') {
-
-    // } else if (icon === 'sleet') {
-      
-    // } else if (icon === 'wind') {
-      
-    // }
+    })}
 
     return (
       <div>
-        <i className="wi wi-night-sleet"></i>
+        <i className={"wi wi-" + iconVal}></i>
       </div>
     )
   }
