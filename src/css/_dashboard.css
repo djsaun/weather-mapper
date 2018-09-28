@@ -25,6 +25,19 @@
         grid-template-columns: repeat(3, 1fr);
       }
 
+      &.todayDetails {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+
+        > div {
+          grid-column: span 2;
+
+          &:nth-of-type(-n+2) {
+            grid-column: span 3;
+          }
+        }
+      }
+
       .icon {
         &::before {
           font-size: 30px;

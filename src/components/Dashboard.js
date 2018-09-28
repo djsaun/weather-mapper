@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Icon from './Icon';
-import {format, parse} from 'date-fns';
-
+import {format} from 'date-fns';
+import {Doughnut} from 'react-chartjs-2';
 class Dashboard extends Component {
   render() {
     const {address, weather} = this.props;
@@ -36,25 +36,49 @@ class Dashboard extends Component {
 
           <div className="today">
             <h5>Today</h5>
-            <div className="weatherContent">
+            <div className="weatherContent todayDetails">
               <div className="sunrise">
+                <p className="label">Sunrise</p>
+                <i className="wi wi-sunrise"></i>
                 <p>{format(convertUnixToDate(weather.sunriseTime), 'h:mma')}</p>
               </div>
 
               <div className="sunset">
-                <p>{weather.sunsetTime}</p>
+                <p className="label">Sunset</p>
+                <i className="wi wi-sunset"></i>
+                <p>{format(convertUnixToDate(weather.sunsetTime), 'h:mma')}</p>
               </div>
 
               <div className="humidity">
-              
+                <p>Humidity</p>
+                <p>{parseInt(weather.humidity * 100, 10)}%</p>
+                <Doughnut data={
+                  {datasets: [{
+                    data: [parseInt(weather.humidity * 100, 10), (100 - parseInt(weather.humidity * 100, 10))],
+                    backgroundColor: ['red', 'rgba(33, 145, 81, 0.2)']
+                  }]}
+                }
+                options={{
+                  tooltips: {
+                    enabled: false
+                  },
+                  hover: {
+                    mode: null
+                  },
+                  elements: {
+                    arc: {
+                      borderWidth: 0
+                    }
+                  }
+                }}  />
               </div>
 
               <div className="uvIndex">
-              
+                <p>UV</p>
               </div>
 
               <div className="visibility">
-              
+                <p>Visibility</p>
               </div>
             </div>
           </div>
