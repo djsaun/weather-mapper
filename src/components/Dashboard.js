@@ -29,18 +29,46 @@ class Dashboard extends Component {
             </div>
           </div> 
 
+          <div className="today">
+            <h5>Today</h5>
+            <div className="weatherContent">
+              <div className="sunrise">
+              
+              </div>
+
+              <div className="sunset">
+              
+              </div>
+
+              <div className="humidity">
+              
+              </div>
+
+              <div className="uvIndex">
+              
+              </div>
+
+              <div className="visibility">
+              
+              </div>
+            </div>
+          </div>
+
           <div className="wind">
             <h5>Wind</h5>
-            <div className="weatherContent">
+            <div className="weatherContent windContent">
               <div className="speed">
+                <i className="wi wi-cloudy-windy"></i>
                 <p>Speed</p>
                 <p>{weather.windSpeed} mph</p>
               </div>
               <div className="gust">
+                <i className="wi wi-cloudy-gusts"></i>
                 <p>Gust</p>
                 <p>{weather.windGust} mph</p>
               </div>
               <div className="direction">
+                <i className={"wi wi-wind wi-from-" + convertWindBearingToText(windBearing).toLowerCase()}></i>
                 <p>Direction</p>
                 <p>{convertWindBearingToText(windBearing)}</p>
               </div>

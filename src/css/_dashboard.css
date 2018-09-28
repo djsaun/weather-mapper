@@ -15,10 +15,15 @@
       border: 1px solid gray;
       border-bottom: none;
     }
-    
+
     .weatherContent {
       padding: 25px;
       border: 1px solid gray;
+
+      &.windContent {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
 
       .icon {
         &::before {

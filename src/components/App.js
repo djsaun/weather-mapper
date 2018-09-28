@@ -48,6 +48,8 @@ class App extends Component {
         sunsetTime: '',
         // The UNIX time at which this data point begins
         time: '',
+        // The UV index out of 10
+        uvIndex: '',
         // The wind gust speed in miles per hour
         windGust: '',
         // The wind speed in miles per hour.
@@ -86,7 +88,6 @@ class App extends Component {
     axios.get(`http://www.mapquestapi.com/geocoding/v1/reverse?key=${process.env.REACT_APP_MAPQUEST_GEOCODE_KEY}&location=${this.state.location.latitude},${this.state.location.longitude}`)
     .then(res => {
       const location = {...res.data.results[0].locations[0]};
-      console.log(location)
 
       this.setState({
         address: {
@@ -116,8 +117,6 @@ class App extends Component {
     .then(res => {
       const currentWeather = res.data;
 
-      console.log(currentWeather);
-
       this.setState({
         weather: {
           ...this.state.weather,
@@ -133,6 +132,7 @@ class App extends Component {
           sunriseTime: currentWeather.daily.data[0].sunriseTime,
           sunsetTime: currentWeather.daily.data[0].sunsetTime,
           time: currentWeather.currently.time,
+          uvIndex: currentWeather.currently.uvIndex,
           windGust: currentWeather.currently.windGust,
           windSpeed: currentWeather.currently.windSpeed,
           windBearing: currentWeather.currently.windBearing,
