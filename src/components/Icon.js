@@ -20,11 +20,13 @@ class Icon extends Component {
     ];
 
     // Loop through iconTypes and set the iconVal value to the appropriate icon
-    {iconTypes.map(iconType => {
+    iconTypes.map(iconType => {
       if (iconType[0] === icon) {
         iconVal = iconType[1];
       }
-    })}
+
+      return iconVal;
+    })
 
     return (
       <div>
