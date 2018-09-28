@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Icon from './Icon';
+import {format, parse} from 'date-fns';
 
 class Dashboard extends Component {
   render() {
@@ -12,6 +13,10 @@ class Dashboard extends Component {
       const val = Math.floor((num / 22.5) + 0.5);
       const arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
       return arr[(val % 16)];
+    }
+
+    function convertUnixToDate(timestamp) {
+      return new Date(timestamp * 1000);
     }
 
     return(
@@ -33,11 +38,11 @@ class Dashboard extends Component {
             <h5>Today</h5>
             <div className="weatherContent">
               <div className="sunrise">
-              
+                <p>{format(convertUnixToDate(weather.sunriseTime), 'h:mma')}</p>
               </div>
 
               <div className="sunset">
-              
+                <p>{weather.sunsetTime}</p>
               </div>
 
               <div className="humidity">

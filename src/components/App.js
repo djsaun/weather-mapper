@@ -50,6 +50,8 @@ class App extends Component {
         time: '',
         // The UV index out of 10
         uvIndex: '',
+        // The average visibility in miles, capped at 10 miles
+        visibility: '',
         // The wind gust speed in miles per hour
         windGust: '',
         // The wind speed in miles per hour.
@@ -133,6 +135,7 @@ class App extends Component {
           sunsetTime: currentWeather.daily.data[0].sunsetTime,
           time: currentWeather.currently.time,
           uvIndex: currentWeather.currently.uvIndex,
+          visibility: currentWeather.currently.visibility,
           windGust: currentWeather.currently.windGust,
           windSpeed: currentWeather.currently.windSpeed,
           windBearing: currentWeather.currently.windBearing,
