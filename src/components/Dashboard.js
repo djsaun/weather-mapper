@@ -1,13 +1,56 @@
 import React, { Component } from 'react';
 import Icon from './Icon';
 import {format} from 'date-fns';
-import {Doughnut} from 'react-chartjs-2';
+import {Chart, Doughnut} from 'react-chartjs-2';
 class Dashboard extends Component {
   render() {
-    const {address, weather} = this.props;
-    const windBearing = weather.windBearing;
-    const icon = weather.icon;
 
+    // Add Chart.js plugin to add text to the center of a doughnut chart
+    Chart.pluginService.register({
+      beforeDraw: function (chart) {
+        if (chart.config.options.elements.center) {
+          //Get ctx from string
+          var ctx = chart.chart.ctx;
+
+          //Get options from the center object in options
+          var centerConfig = chart.config.options.elements.center;
+          var fontStyle = centerConfig.fontStyle || 'Arial';
+          var txt = centerConfig.text;
+          var color = centerConfig.color || '#000';
+          var maxFontSize = centerConfig.maxFontSize || 25;
+          var sidePadding = centerConfig.sidePadding || 20;
+          var sidePaddingCalculated = (sidePadding/100) * (chart.innerRadius * 2)
+          //Start with a base font of 30px
+          ctx.font = "30px " + fontStyle;
+
+          //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+          var stringWidth = ctx.measureText(txt).width;
+          var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
+
+          // Find out how much the font can grow in width.
+          var widthRatio = elementWidth / stringWidth;
+          var newFontSize = Math.floor(30 * widthRatio);
+          var elementHeight = (chart.innerRadius * 2);
+
+          // Pick a new font size so it will not be larger than the height of label.
+          var fontSizeToUse = Math.min(newFontSize, elementHeight, maxFontSize);
+
+          //Set font settings to draw it correctly.
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
+          var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
+          ctx.font = fontSizeToUse+"px " + fontStyle;
+          ctx.fillStyle = color;
+
+          //Draw text in center
+          ctx.fillText(txt, centerX, centerY);
+        }
+      }
+    });
+
+    const {weather} = this.props;
+    const windBearing = weather.windBearing;
 
     function convertWindBearingToText(num) {
       const val = Math.floor((num / 22.5) + 0.5);
@@ -51,7 +94,6 @@ class Dashboard extends Component {
 
               <div className="humidity">
                 <p>Humidity</p>
-                <p>{parseInt(weather.humidity * 100, 10)}%</p>
                 <Doughnut data={
                   {datasets: [{
                     data: [parseInt(weather.humidity * 100, 10), (100 - parseInt(weather.humidity * 100, 10))],
@@ -59,6 +101,7 @@ class Dashboard extends Component {
                   }]}
                 }
                 options={{
+                  cutoutPercentage: 80,
                   tooltips: {
                     enabled: false
                   },
@@ -68,6 +111,13 @@ class Dashboard extends Component {
                   elements: {
                     arc: {
                       borderWidth: 0
+                    },
+                    center: {
+                      text: parseInt(weather.humidity * 100, 10) + '%',
+                      maxFontSize: 12,
+                      color: '#FF6384', // Default is #000000
+                      fontStyle: 'Arial', // Default is Arial
+                      sidePadding: 20 // Defualt is 20 (as a percentage)
                     }
                   }
                 }}  />
@@ -75,10 +125,64 @@ class Dashboard extends Component {
 
               <div className="uvIndex">
                 <p>UV</p>
+                <Doughnut data={
+                  {datasets: [{
+                    data: [weather.uvIndex, (10 - weather.uvIndex)],
+                    backgroundColor: ['red', 'rgba(33, 145, 81, 0.2)']
+                  }]}
+                }
+                options={{
+                  cutoutPercentage: 80,
+                  tooltips: {
+                    enabled: false
+                  },
+                  hover: {
+                    mode: null
+                  },
+                  elements: {
+                    arc: {
+                      borderWidth: 0
+                    },
+                    center: {
+                      text: weather.uvIndex,
+                      maxFontSize: 16,
+                      color: '#FF6384', // Default is #000000
+                      fontStyle: 'Arial', // Default is Arial
+                      sidePadding: 20 // Defualt is 20 (as a percentage)
+                    }
+                  }
+                }}  />
               </div>
 
               <div className="visibility">
                 <p>Visibility</p>
+                <Doughnut data={
+                  {datasets: [{
+                    data: [weather.visibility, (10 - weather.visibility)],
+                    backgroundColor: ['red', 'rgba(33, 145, 81, 0.2)']
+                  }]}
+                }
+                options={{
+                  cutoutPercentage: 80,
+                  tooltips: {
+                    enabled: false
+                  },
+                  hover: {
+                    mode: null
+                  },
+                  elements: {
+                    arc: {
+                      borderWidth: 0
+                    },
+                    center: {
+                      text: weather.visibility + ' mi',
+                      maxFontSize: 16,
+                      color: '#FF6384', // Default is #000000
+                      fontStyle: 'Arial', // Default is Arial
+                      sidePadding: 20 // Defualt is 20 (as a percentage)
+                    }
+                  }
+                }}  />
               </div>
             </div>
           </div>
@@ -105,7 +209,6 @@ class Dashboard extends Component {
           </div>
         </div>  
         }
-
       </div>
     )
   }
