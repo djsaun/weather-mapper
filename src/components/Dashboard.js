@@ -15,31 +15,35 @@ class Dashboard extends Component {
     }
 
     return(
-      <div>
-        <h3>{address.city ? address.city + ',' : ''} {address.state ? address.state : ''}{address.country ? ', ' + address.country : ''}</h3>
+      <div className="dashboard container">
+        {/* <h1>{address.city ? address.city + ',' : ''} {address.state ? address.state : ''}{address.country ? ', ' + address.country : ''}</h1> */}
         {weather.display && 
         <div className="weatherContainer">
           <div className="current">
             <h5>Current Conditions</h5>
-            <Icon icon={weather.icon} />
-            <p>{weather.summary}</p>
-            <p>{weather.temp}°</p>
-            <p>{weather.apparentTemp}°</p>
-          </div>
+            <div className="weatherContent">
+              <Icon className="icon" icon={weather.icon} />
+              <p className="summary">{weather.summary}</p>
+              <p className="currentTemp">{weather.temp}°</p>
+              <p className="apparentTemp">Feels like {weather.apparentTemp}°</p>
+            </div>
+          </div> 
 
           <div className="wind">
             <h5>Wind</h5>
-            <div className="speed">
-              <p>Speed</p>
-              <p>{weather.windSpeed} mph</p>
-            </div>
-            <div className="gust">
-              <p>Gust</p>
-              <p>{weather.windGust} mph</p>
-            </div>
-            <div className="direction">
-              <p>Direction</p>
-              <p>{convertWindBearingToText(windBearing)}</p>
+            <div className="weatherContent">
+              <div className="speed">
+                <p>Speed</p>
+                <p>{weather.windSpeed} mph</p>
+              </div>
+              <div className="gust">
+                <p>Gust</p>
+                <p>{weather.windGust} mph</p>
+              </div>
+              <div className="direction">
+                <p>Direction</p>
+                <p>{convertWindBearingToText(windBearing)}</p>
+              </div>
             </div>
           </div>
         </div>  

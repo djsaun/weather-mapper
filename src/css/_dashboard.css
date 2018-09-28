@@ -1,0 +1,40 @@
+@import '_variables.css';
+
+.weatherContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 25px;
+
+  > div {
+    text-align: center;
+
+    h5 {
+      margin: 0;
+      padding: 25px 20px;
+      text-align: left;
+      border: 1px solid gray;
+      border-bottom: none;
+    }
+    
+    .weatherContent {
+      padding: 25px;
+      border: 1px solid gray;
+
+      .icon {
+        &::before {
+          font-size: 30px;
+        }
+      }
+
+      .currentTemp {
+        margin: 0;
+        font-size: 36px;
+      }
+
+      .apparentTemp {
+        margin: 10px 0 0;
+        color: lightgray;
+      }
+    }
+  }
+}

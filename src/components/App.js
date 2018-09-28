@@ -153,8 +153,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
+        <header className="App-header container">
+          <h1>{this.state.address.city ? this.state.address.city + ',' : ''} {this.state.address.state ? this.state.address.state : ''}{this.state.address.country ? ', ' + this.state.address.country : ''}</h1>
         </header>
         <Dashboard address={this.state.address} weather={this.state.weather} />
         <Maps {...this.state.location} getCoordinates={this.getCoordinates} />
