@@ -5,6 +5,8 @@ class Icon extends Component {
     const icon = this.props.icon;
     let iconVal;
 
+    // TODO: Add fallback if no icon type present
+
     // Associate Dark Sky icons (index 0) with weather icons (index 1)
     const iconTypes = [
       ["clear-day", 'day-sunny'],
