@@ -97,7 +97,7 @@ class Dashboard extends Component {
                 <Doughnut data={
                   {datasets: [{
                     data: [parseInt(weather.humidity * 100, 10), (100 - parseInt(weather.humidity * 100, 10))],
-                    backgroundColor: ['red', 'rgba(33, 145, 81, 0.2)']
+                    backgroundColor: ['#848FA5', 'rgba(45, 45, 42, 0.2)']
                   }]}
                 }
                 options={{
@@ -115,7 +115,7 @@ class Dashboard extends Component {
                     center: {
                       text: parseInt(weather.humidity * 100, 10) + '%',
                       maxFontSize: 12,
-                      color: '#FF6384', // Default is #000000
+                      color: '#2D2D2A', // Default is #000000
                       fontStyle: 'Arial', // Default is Arial
                       sidePadding: 20 // Defualt is 20 (as a percentage)
                     }
@@ -128,7 +128,7 @@ class Dashboard extends Component {
                 <Doughnut data={
                   {datasets: [{
                     data: [weather.uvIndex, (10 - weather.uvIndex)],
-                    backgroundColor: ['red', 'rgba(33, 145, 81, 0.2)']
+                    backgroundColor: ['#848FA5', 'rgba(45, 45, 42, 0.2)']
                   }]}
                 }
                 options={{
@@ -146,7 +146,7 @@ class Dashboard extends Component {
                     center: {
                       text: weather.uvIndex,
                       maxFontSize: 16,
-                      color: '#FF6384', // Default is #000000
+                      color: '#2D2D2A', // Default is #000000
                       fontStyle: 'Arial', // Default is Arial
                       sidePadding: 20 // Defualt is 20 (as a percentage)
                     }
@@ -159,7 +159,7 @@ class Dashboard extends Component {
                 <Doughnut data={
                   {datasets: [{
                     data: [weather.visibility, (10 - weather.visibility)],
-                    backgroundColor: ['red', 'rgba(33, 145, 81, 0.2)']
+                    backgroundColor: ['#848FA5', 'rgba(45, 45, 42, 0.2)']
                   }]}
                 }
                 options={{
@@ -177,7 +177,7 @@ class Dashboard extends Component {
                     center: {
                       text: weather.visibility + ' mi',
                       maxFontSize: 16,
-                      color: '#FF6384', // Default is #000000
+                      color: '#2D2D2A', // Default is #000000
                       fontStyle: 'Arial', // Default is Arial
                       sidePadding: 20 // Defualt is 20 (as a percentage)
                     }
